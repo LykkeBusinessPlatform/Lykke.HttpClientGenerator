@@ -45,9 +45,10 @@ namespace Lykke.HttpClientGenerator.Tests
             {
                 await client.TestMethod();
             }
-            catch(ApiException ex) when(ex.StatusCode == HttpStatusCode.BadRequest)
+            catch (ApiException ex) when (ex.StatusCode == HttpStatusCode.BadRequest)
             {
             }
+  
 
             // Arrange
 

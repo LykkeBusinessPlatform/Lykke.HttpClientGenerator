@@ -23,7 +23,7 @@ namespace Lykke.HttpClientGenerator.Infrastructure
             }
             catch (ApiException ex)
             {
-                var errResponse = ex.GetContentAs<ErrorResponse>();
+                var errResponse = await ex.GetContentAsAsync<ErrorResponse>();
 
                 if (errResponse != null)
                 {

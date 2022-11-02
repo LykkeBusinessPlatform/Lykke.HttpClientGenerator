@@ -53,7 +53,7 @@ namespace Lykke.HttpClientGenerator
             _refitSettings = new RefitSettings
             {
                 HttpMessageHandlerFactory = () => httpMessageHandler,
-                JsonSerializerSettings = jsonSerializerSettings
+                ContentSerializer = new NewtonsoftJsonContentSerializer(jsonSerializerSettings)
             };
 
             if (urlParameterFormatter != null)
