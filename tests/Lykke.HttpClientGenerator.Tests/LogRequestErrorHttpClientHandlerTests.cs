@@ -17,11 +17,13 @@ namespace Lykke.HttpClientGenerator.Tests
         public async Task ShouldLogRequestResponse()
         {
             // Arrange
+            var host = "http://fake.host";
 
             var fakeHttpClientHandler = new FakeHttpClientHandler(r =>
                 new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent("testError")
+                    Content = new StringContent("testError"),
+                    RequestMessage = new HttpRequestMessage(HttpMethod.Get, host)
                 }
             );
             var logFactory = new Mock<ILogFactory>();
@@ -31,7 +33,7 @@ namespace Lykke.HttpClientGenerator.Tests
                 .Setup(x => x.CreateLog(It.IsAny<object>()))
                 .Returns(log.Object);
 
-            var client = HttpClientGenerator.BuildForUrl("http://fake.host")
+            var client = HttpClientGenerator.BuildForUrl(host)
                 .WithoutCaching()
                 .WithoutRetries()
                 .WithRequestErrorLogging(logFactory.Object)
