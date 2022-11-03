@@ -136,7 +136,7 @@ namespace Lykke.HttpClientGenerator
         /// <summary>
         /// Configure client to log request and response data if status code of response does not equal 2xx.
         /// </summary>
-        /// <param name="logFactory">Factory to create instance of <see cref="ILog"/>.</param>
+        /// <param name="logFactory">Factory to create instance of <see cref="ILogFactory"/>.</param>
         /// <returns></returns>
         public HttpClientGeneratorBuilder WithRequestErrorLogging(
             [NotNull] ILogFactory logFactory)

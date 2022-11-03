@@ -14,7 +14,12 @@ namespace Lykke.HttpClientGenerator.Tests
         public void Always_ShouldRetryCorrectly()
         {
             // arrange
-            var fakeHttpClientHandler = new FakeHttpClientHandler(r => new HttpResponseMessage(HttpStatusCode.BadGateway));
+            var host = "http://fake.host";
+            var fakeHttpClientHandler = new FakeHttpClientHandler(r =>
+                new HttpResponseMessage(HttpStatusCode.BadGateway)
+                {
+                    RequestMessage = new HttpRequestMessage(HttpMethod.Get, host)
+                });
             var refitSettings = new RefitSettings
             {
                 HttpMessageHandlerFactory = () =>
@@ -24,7 +29,7 @@ namespace Lykke.HttpClientGenerator.Tests
                     }
             };
 
-            var proxy = RestService.For<ITestInterface>("http://fake.host", refitSettings);
+            var proxy = RestService.For<ITestInterface>(host, refitSettings);
 
             // act
             var invocation = proxy.Invoking(p => p.TestMethod().GetAwaiter().GetResult());
