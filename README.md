@@ -64,7 +64,94 @@ Calling `inner()` in the last one - means calling the actial method.
 
 To add your custom wrapper use the `HttpClientGeneratorBuilder.WithAdditionalCallsWrapper()` method. This is intended for advanced usecases.
 
-HttpClientGenerator has only one default wrapper: `CachingCallsWrapper`. It is added by default.
+HttpClientGenerator has multiple wrappers, one of them is added by default: `CachingCallsWrapper`.
+
+### ProblemDetailsExceptionHandlerCallsWrapper
+
+This wrapper is intended to deal with the ProblemDetails exceptions (RFC 7807) and map API error codes into domain errors. 
+In order to have it worked, one should add a mapper delegate while initializing the wrapper:
+```csharp
+object Mapper(string apiErrorCode)
+{
+    switch (apiErrorCode)
+    {
+        case "FooError":
+            return "DomainFooError";
+        case "BarError":
+            return "DomainBarError";
+        default:
+            return null;
+    }
+}
+
+var generator = HttpClientGenerator.BuildForUrl(serviceUrl)
+    .WithAdditionalCallsWrapper(new ProblemDetailsExceptionHandlerCallsWrapper(Mapper))
+    .Create();
+```
+
+The wrapper will catch the `ValidationApiException`, enriches and rethrows it.
+
+Here is an example of client code:
+```csharp
+try
+{
+    await client.GetFoo();
+}
+catch (ValidationApiException ex)
+{
+    var errorCode = ex.GetDomainErrorCode();
+    
+    switch (errorCode)
+    {
+        case "DomainFooError":
+            return BadRequest(new { Message = "Foo error" });   
+        case "DomainBarError":
+            return BadRequest(new { Message = "Bar error" });
+    }
+}
+```
+
+The one can use typed errors instead of strings:
+```csharp
+enum DomainErrorCodes
+{
+    FooError,
+    BarError
+}
+
+object TypedMapper(string apiErrorCode)
+{
+    switch (apiErrorCode)
+    {
+        case "FooError":
+            return DomainErrorCodes.FooError;
+        case "BarError":
+            return DomainErrorCodes.BarError;
+        default:
+            return null;
+    }
+}
+```
+
+Here is an example of client code:
+```csharp
+try
+{
+    await client.GetFoo();
+}
+catch (ValidationApiException ex)
+{
+    var errorCode = ex.GetDomainError<DomainErrorCodes>();
+    
+    switch (errorCode)
+    {
+        case DomainErrorCodes.FooError:
+            return BadRequest(new { Message = "Foo error" });   
+        case DomainErrorCodes.BarError:
+            return BadRequest(new { Message = "Bar error" });
+    }
+}
+```
 
 ### Caching customization
 Constructor of `CachingCallsWrapper` accepts a `ICachingStrategy` object. There is one default strategy: `AttributeBasedCachingStrategy`. 
