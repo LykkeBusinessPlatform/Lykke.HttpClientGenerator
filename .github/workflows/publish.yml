@@ -16,4 +16,4 @@ jobs:
     - name: Create the package
       run: dotnet pack --include-symbols --include-source --configuration Release src/Lykke.HttpClientGenerator /p:Version=${GITHUB_REF#refs/tags/}
     - name: Publish the package to Nuget
-      run: dotnet nuget push src/Lykke.HttpClientGenerator/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }}
+      run: dotnet nuget push src/Lykke.HttpClientGenerator/bin/Release/*.nupkg -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_TOCKEN }} --skip-duplicate
