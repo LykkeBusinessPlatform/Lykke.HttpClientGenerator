@@ -17,16 +17,19 @@ namespace Lykke.HttpClientGenerator.Infrastructure
     /// Calls wrapper to read API error code (RFC 7807) and map it to domain error.
     /// Only first error will be used.
     /// The mapping is optional and done by <see cref="MapProblemDetailsErrorDelegate"/> delegate.
-    /// The original exception will be thrown in any case. If the API error code was successfully
-    /// mapped to domain error, it will be added to the exception's Data collection and can be read
-    /// later with <see cref="ValidationApiExceptionExtensions.GetDomainErrorCode"/>
+    /// The original exception will be thrown in any case.
+    /// If mapper was not specified, the original error code will be used instead. 
+    /// If the API error code was successfully mapped to domain error or mapper was not specified,
+    /// the mapped error code / API error code will be added to the exception's
+    /// Data collection and can be read later with
+    /// <see cref="ValidationApiExceptionExtensions.GetDomainErrorCode"/>
     /// or <see cref="ValidationApiExceptionExtensions.GetDomainError"/> methods.
     /// Otherwise, the original API error code can be taken from <see cref="ProblemDetails.Errors"/> dictionary.
     /// </summary>
     [PublicAPI]
     public sealed class ProblemDetailsExceptionHandlerCallsWrapper : ICallsWrapper
     {
-        private readonly MapProblemDetailsErrorDelegate _errorCodeMapper;
+        [CanBeNull] private readonly MapProblemDetailsErrorDelegate _errorCodeMapper;
         
         /// <summary>
         /// Creates an instance of <see cref="ProblemDetailsExceptionHandlerCallsWrapper"/>
@@ -38,7 +41,8 @@ namespace Lykke.HttpClientGenerator.Infrastructure
         }
         
         /// <summary>
-        /// Handles API error code (RFC 7807) and maps it to domain error.
+        /// Handles API error code (RFC 7807) and maps it to domain error if
+        /// mapper was specified.
         /// </summary>
         /// <param name="targetMethod"></param>
         /// <param name="args"></param>
@@ -60,10 +64,13 @@ namespace Lykke.HttpClientGenerator.Infrastructure
 
                 if (apiErrorCode != null)
                 {
-                    var mappedError = _errorCodeMapper?.Invoke(apiErrorCode);
-
-                    if (mappedError != null)
+                    if (_errorCodeMapper == null)
                     {
+                        ex.SetDomainError(apiErrorCode);
+                    }
+                    else
+                    {
+                        var mappedError = _errorCodeMapper.Invoke(apiErrorCode);
                         ex.SetDomainError(mappedError);
                     }
                 }
