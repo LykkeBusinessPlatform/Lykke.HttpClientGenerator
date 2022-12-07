@@ -58,9 +58,7 @@ namespace Lykke.HttpClientGenerator.Infrastructure
             }
             catch (ValidationApiException ex)
             {
-                var problemDetails = await ex.GetContentAsAsync<ProblemDetails>();
-
-                var apiErrorCode = problemDetails?.Errors.Keys.FirstOrDefault();
+                var apiErrorCode = ex.Content.Errors.Keys.FirstOrDefault();
 
                 if (apiErrorCode != null)
                 {
