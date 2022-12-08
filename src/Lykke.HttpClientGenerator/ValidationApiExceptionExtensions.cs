@@ -1,5 +1,5 @@
+using System.Linq;
 using Common;
-using Lykke.HttpClientGenerator.Infrastructure;
 using Refit;
 
 namespace Lykke.HttpClientGenerator
@@ -9,8 +9,6 @@ namespace Lykke.HttpClientGenerator
     /// </summary>
     public static class ValidationApiExceptionExtensions
     {
-        private const string DomainErrorKey = "DomainError";
-        
         /// <summary>
         /// Get http request caused the exception problem details as text 
         /// </summary>
@@ -30,60 +28,22 @@ namespace Lykke.HttpClientGenerator
         {
             return $"Couldn't execute http request. {exception.GetProblemDetailsPhrase()} {exception.GetRequestPhrase()}";
         }
-        
-        /// <summary>
-        /// Gets the mapped domain error code as string if <see cref="ProblemDetailsExceptionHandlerCallsWrapper"/>
-        /// was used and API produced an error according to RFC 7807
-        /// </summary>
-        /// <returns>Domain error code</returns>
-        public static string GetDomainErrorCode(this ValidationApiException exception)
-        {
-            if (exception.Data.Contains(DomainErrorKey))
-                return exception.Data[DomainErrorKey]?.ToString() ?? string.Empty;
-
-            return string.Empty;
-        }
 
         /// <summary>
-        /// Gets the mapped typed domain error if <see cref="ProblemDetailsExceptionHandlerCallsWrapper"/>
-        /// was used and API produced an error according to RFC 7807
+        /// Gets the first error code and message from the Errors collection
         /// </summary>
         /// <param name="exception"></param>
-        /// <param name="defaultValue"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns>Domain error</returns>
-        public static T GetDomainError<T>(this ValidationApiException exception, T defaultValue = default)
+        /// <returns></returns>
+        public static (string errorCode, string message) GetFirstError(this ValidationApiException exception)
         {
-            if (exception.Data.Contains(DomainErrorKey))
-            {
-                if (exception.Data[DomainErrorKey] is T value)
-                    return value;
-
-                return defaultValue;
-            }
-
-            return defaultValue;
-        }
-        
-        /// <summary>
-        /// Sets the mapped from problem details domain error code as string
-        /// </summary>
-        /// <param name="exception"></param>
-        /// <param name="code">Error code</param>
-        public static void SetDomainErrorCode(this ValidationApiException exception, string code)
-        {
-            exception.Data[DomainErrorKey] = code;
-        }
-        
-        /// <summary>
-        /// Sets the mapped from problem details typed domain error
-        /// </summary>
-        /// <param name="exception"></param>
-        /// <param name="value"></param>
-        /// <typeparam name="T">Error</typeparam>
-        public static void SetDomainError<T>(this ValidationApiException exception, T value)
-        {
-            exception.Data[DomainErrorKey] = value;
+            var firstErrorCode = exception?.Content.Errors.FirstOrDefault().Key;
+            
+            if (firstErrorCode == null)
+                return (string.Empty, string.Empty);
+            
+            var firstErrorMessage = exception.Content.Errors[firstErrorCode].FirstOrDefault();
+            
+            return (firstErrorCode, firstErrorMessage);
         }
     }
 }
