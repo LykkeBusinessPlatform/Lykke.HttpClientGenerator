@@ -25,8 +25,9 @@ namespace Lykke.HttpClientGenerator.Infrastructure
         {
             var firstErrorResponse = CreateFirstErrorResponse(exception);
 
-            context.Response.StatusCode = (int) HttpStatusCode.Conflict;
+            context.Response.StatusCode = (int) HttpStatusCode.BadRequest;
             context.Response.ContentType = JsonContentType;
+            
             await context.Response.WriteAsync(firstErrorResponse.ToJson());
         }
 
