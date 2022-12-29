@@ -9,7 +9,7 @@ namespace Lykke.HttpClientGenerator.Infrastructure
     /// <summary>
     /// Default implementation of <see cref="IValidationApiExceptionHandler"/>.
     /// Takes the first error and message from <see cref="ProblemDetails"/> object
-    /// and writes it to the response with <see cref="HttpStatusCode.Conflict"/>
+    /// and writes it to the response with <see cref="HttpStatusCode.BadRequest"/>
     /// </summary>
     public sealed class DefaultValidationApiExceptionHandler : IValidationApiExceptionHandler
     {
