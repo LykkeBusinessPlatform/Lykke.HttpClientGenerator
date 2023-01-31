@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Lykke.HttpClientGenerator.Infrastructure;
@@ -37,8 +38,19 @@ namespace Lykke.HttpClientGenerator
                     apiErrorDetails = $" with reason '{reason}'";
                 }
 
+                var httpStatusCode = string.Empty;
+                if (e is HttpRequestException httpRequestException)
+                {
+                    httpStatusCode = httpRequestException.StatusCode?.ToString();
+                }
+                
+                var httpStatusCodeInfo = string.IsNullOrEmpty(httpStatusCode)
+                    ? "(no status code)"
+                    : $"({httpStatusCode})";
+
                 var endpoint = httpPathAttr?.Path ?? $"{targetMethod.DeclaringType.Name}.{targetMethod.Name}";
-                var message = $"An error occurred while trying to reach {_serviceName} ({endpoint}){apiErrorDetails}: {e.Message}";
+                
+                var message = $"An error{httpStatusCodeInfo} occurred while trying to reach {_serviceName} ({endpoint}){apiErrorDetails}: {e.Message}";
 
                 // Have to use reflection here, otherwise can't change message without wrapping exception
                 // which would conflict with the requirement of not losing exception type
