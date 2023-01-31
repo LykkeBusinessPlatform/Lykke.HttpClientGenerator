@@ -15,9 +15,13 @@ namespace Lykke.HttpClientGenerator.Retries
     /// </summary>
     public class RetryingHttpClientHandler : DelegatingHandler
     {
-        private static readonly HttpStatusCode[] _codesToRetry = {
-            HttpStatusCode.InternalServerError, HttpStatusCode.BadGateway, HttpStatusCode.ServiceUnavailable,
-            HttpStatusCode.GatewayTimeout, HttpStatusCode.RequestTimeout,
+        private static readonly HttpStatusCode[] _codesToRetry =
+        {
+            HttpStatusCode.InternalServerError, 
+            HttpStatusCode.BadGateway, 
+            HttpStatusCode.ServiceUnavailable,
+            HttpStatusCode.GatewayTimeout, 
+            HttpStatusCode.RequestTimeout,
         };
         
         private readonly AsyncRetryPolicy _retryPolicy;
