@@ -11,7 +11,9 @@ using Polly.Retry;
 namespace Lykke.HttpClientGenerator.Retries
 {
     /// <summary>
-    /// Adds retries to the http request
+    /// Adds retries to the http request, handles either
+    /// <see cref="HttpRequestException"/> or http status codes: 500, 502, 503,
+    /// 504, 408
     /// </summary>
     public class RetryingHttpClientHandler : DelegatingHandler
     {
