@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>5.5.1</Version>
+    <Version>5.6.0</Version>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.8.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />

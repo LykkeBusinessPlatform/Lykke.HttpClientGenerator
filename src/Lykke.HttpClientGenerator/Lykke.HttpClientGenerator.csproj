@@ -2,15 +2,16 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <Version>5.5.1</Version>
+    <Version>5.6.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageLicenseUrl>https://github.com/LykkeBusiness/Lykke.HttpClientGenerator/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>
+      https://github.com/LykkeBusiness/Lykke.HttpClientGenerator/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/LykkeBusiness/Lykke.HttpClientGenerator</PackageProjectUrl>
     <Description>
-            This package helps to generate client proxy for an api using the Refit library.
-            It adds cache and retries using Polly to the generated proxies.
-            User logic can also be added as wrappers to the requests or to the method calls.
-        </Description>
+      This package helps to generate client proxy for an api using the Refit library.
+      It adds cache and retries using Polly to the generated proxies.
+      User logic can also be added as wrappers to the requests or to the method calls.
+    </Description>
     <PackageTags>refit;polly;dotnet-core;csharp;api-client</PackageTags>
     <PackageId>LykkeBiz.HttpClientGenerator</PackageId>
   </PropertyGroup>
