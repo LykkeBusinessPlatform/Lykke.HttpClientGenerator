@@ -1,4 +1,4 @@
-## [[tbd]] (2024-02-01)
+## 5.6.2 (2024-02-01)
 
 ### Updated
 - Fixed nuget package metadata (`PackageLicenseUrl` and `PackageProjectUrl`) to avoid redirects.

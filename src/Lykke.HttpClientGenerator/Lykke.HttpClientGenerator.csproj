@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <Version>5.6.1</Version>
+    <Version>5.6.2</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageLicenseUrl>
       https://github.com/LykkeBusinessPlatform/Lykke.HttpClientGenerator/blob/master/LICENSE
