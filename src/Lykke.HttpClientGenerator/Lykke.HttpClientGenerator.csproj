@@ -5,8 +5,11 @@
     <Version>5.6.1</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageLicenseUrl>
-      https://github.com/LykkeBusiness/Lykke.HttpClientGenerator/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/LykkeBusiness/Lykke.HttpClientGenerator</PackageProjectUrl>
+      https://github.com/LykkeBusinessPlatform/Lykke.HttpClientGenerator/blob/master/LICENSE
+    </PackageLicenseUrl>
+    <PackageProjectUrl>
+      https://github.com/LykkeBusinessPlatform/Lykke.HttpClientGenerator
+    </PackageProjectUrl>
     <Description>
       This package helps to generate client proxy for an api using the Refit library.
       It adds cache and retries using Polly to the generated proxies.
