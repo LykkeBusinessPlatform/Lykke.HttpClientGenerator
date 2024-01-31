@@ -1,4 +1,4 @@
-## [[tbd]] (2024-01-31)
+## 5.6.1 (2024-01-31)
 
 ### Updated
 - Issuing a new release according to LT-5184. This release is identical to 5.6.0.
