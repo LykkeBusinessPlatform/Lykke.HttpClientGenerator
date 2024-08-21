@@ -4,10 +4,14 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
 using Lykke.HttpClientGenerator.Infrastructure;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using NUnit.Framework;
+
 using Refit;
 
 namespace Lykke.HttpClientGenerator.Tests
@@ -152,10 +156,16 @@ namespace Lykke.HttpClientGenerator.Tests
 
         public override bool Equals(object obj)
         {
-            if (!(obj is TestA other))
-                return false;
-            return Name == other.Name;
+            if (obj is TestA other)
+                return Name == other.Name;
+            return false;
         }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+
     }
 
     public class TestB : BaseTest
@@ -166,9 +176,14 @@ namespace Lykke.HttpClientGenerator.Tests
 
         public override bool Equals(object obj)
         {
-            if (!(obj is TestB other))
-                return false;
-            return Value == other.Value;
+            if (obj is TestB other)
+                return Value == other.Value;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
         }
     }
 
@@ -178,9 +193,14 @@ namespace Lykke.HttpClientGenerator.Tests
 
         public override bool Equals(object obj)
         {
-            if (!(obj is CommonTest other))
-                return false;
-            return Temp == other.Temp;
+            if (obj is CommonTest other)
+                return Temp == other.Temp;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Temp.GetHashCode();
         }
     }
 }
