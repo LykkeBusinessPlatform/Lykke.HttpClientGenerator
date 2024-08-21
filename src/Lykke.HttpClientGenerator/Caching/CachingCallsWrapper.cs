@@ -1,7 +1,10 @@
 ﻿using Lykke.HttpClientGenerator.Infrastructure;
+
 using Newtonsoft.Json;
+
 using Polly;
 using Polly.Caching;
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
