@@ -1,3 +1,8 @@
+## [[tbd]] (2024-10-24)
+
+### Updated
+- Upgrade Lykke.Snow.Common without MessagePacl
+
 ## 6.0.0 (2024-08-21)
 
 ### Updated
