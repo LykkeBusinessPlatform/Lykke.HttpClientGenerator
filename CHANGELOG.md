@@ -1,4 +1,4 @@
-## [[tbd]] ([[date]])
+## 6.1.0 ([[date]])
 
 ### Updated
 - Upgrade Lykke.Snow.Common without MessagePack
