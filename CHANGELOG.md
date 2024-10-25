@@ -1,3 +1,8 @@
+## [[tbd]] ([[date]])
+
+### Updated
+- Upgrade Lykke.Snow.Common without MessagePack
+
 ## 6.0.0 (2024-08-21)
 
 ### Updated
