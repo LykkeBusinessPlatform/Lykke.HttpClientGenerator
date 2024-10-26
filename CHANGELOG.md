@@ -1,4 +1,9 @@
-## 6.1.0 ([[date]])
+## [[tbd]] ([[date]])
+
+### Updated
+- Bump LykkeBiz.Common -> 9.0.0
+
+## 6.1.0 (2024-10-25)
 
 ### Updated
 - Upgrade Lykke.Snow.Common without MessagePack
