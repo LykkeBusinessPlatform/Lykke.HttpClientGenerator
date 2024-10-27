@@ -1,4 +1,4 @@
-## 6.1.0 ([[date]])
+## [[tbd]] ([[date]])
 
 ### Updated
 - Bump LykkeBiz.Common -> 9.0.0
