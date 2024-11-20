@@ -1,13 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <Version>6.2.0</Version>
-    <PackageLicenseUrl>
-      https://github.com/LykkeBusinessPlatform/Lykke.HttpClientGenerator/blob/master/LICENSE
-    </PackageLicenseUrl>
-    <PackageProjectUrl>
-      https://github.com/LykkeBusinessPlatform/Lykke.HttpClientGenerator
-    </PackageProjectUrl>
     <Description>
       This package helps to generate client proxy for an api using the Refit library.
       It adds cache and retries using Polly to the generated proxies.
@@ -15,13 +8,13 @@
     </Description>
     <PackageTags>refit;polly;dotnet-core;csharp;api-client</PackageTags>
     <PackageId>LykkeBiz.HttpClientGenerator</PackageId>
-    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Lykke.Snow.Common" Version="5.0.1" />
-    <PackageReference Include="LykkeBiz.Common" Version="9.0.0" />
-    <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
-    <PackageReference Include="Polly" Version="7.2.3" />
-    <PackageReference Include="Refit" Version="5.2.4" />
+    <PackageReference Include="Lykke.Snow.Common" />
+    <PackageReference Include="LykkeBiz.Common" />
+    <PackageReference Include="Nito.AsyncEx" />
+    <PackageReference Include="Polly" />
+    <PackageReference Include="Refit" />
+    <PackageReference Include="Refit.Newtonsoft.Json" />
   </ItemGroup>
 </Project>
