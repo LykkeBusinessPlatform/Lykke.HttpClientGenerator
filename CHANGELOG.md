@@ -1,3 +1,8 @@
+## [[tbd]] ([[date]])
+
+### Updated
+- Bump Refit -> 8.0.0
+
 ## 6.2.0 (2024-10-27)
 
 ### Updated
