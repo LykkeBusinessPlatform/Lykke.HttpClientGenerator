@@ -2,20 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <Version>6.2.0</Version>
     <IsPackable>false</IsPackable>
-    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit" Version="5.2.4" />
+    <PackageReference Include="Refit" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.HttpClientGenerator.TestWebService.Contracts\Lykke.HttpClientGenerator.TestWebService.Contracts.csproj" />
+    <ProjectReference
+      Include="..\Lykke.HttpClientGenerator.TestWebService.Contracts\Lykke.HttpClientGenerator.TestWebService.Contracts.csproj" />
     <ProjectReference Include="..\Lykke.HttpClientGenerator\Lykke.HttpClientGenerator.csproj" />
   </ItemGroup>
 

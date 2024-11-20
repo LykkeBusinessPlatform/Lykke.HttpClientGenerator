@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 using Lykke.HttpClientGenerator.Infrastructure;
 
@@ -41,7 +37,7 @@ namespace Lykke.HttpClientGenerator.Tests
                 .Generate<IJsonTestInterface>()
                 .Test();
 
-            CollectionAssert.AreEqual(list, result);
+            Assert.That(result, Is.EqualTo(list));
         }
 
         [Test]
@@ -67,7 +63,7 @@ namespace Lykke.HttpClientGenerator.Tests
                 .Generate<IJsonTestInterface>()
                 .TestOnlyOne();
 
-            CollectionAssert.AreEqual(list, result);
+            Assert.That(result, Is.EqualTo(list));
         }
 
         [Test]
@@ -91,7 +87,7 @@ namespace Lykke.HttpClientGenerator.Tests
                 .Generate<IJsonTestInterface>()
                 .TestOnlyOne();
 
-            CollectionAssert.AreEqual(list, result);
+            Assert.That(result, Is.EqualTo(list));
         }
 
 
